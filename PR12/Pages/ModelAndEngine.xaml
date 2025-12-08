@@ -8,7 +8,50 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ModelAndEngine">
 
-    <Grid>
-        
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0" Text="Шаг 1: Выбор модели и двигателя"></TextBlock>
+
+        <!-- Содержимое -->
+        <StackPanel Grid.Row="1">
+            <Border BorderBrush="#BDC3C7" BorderThickness="1" 
+                    CornerRadius="5" Padding="20" Margin="0,0,0,20">
+                <StackPanel>
+                    <TextBlock Text="Выберите модель:" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <ComboBox x:Name="ModelComboBox" FontSize="14" Padding="5">
+                        <ComboBoxItem Content="Седан Comfort - 1 200 000 ₽"/>
+                        <ComboBoxItem Content="Кроссовер Sport - 1 800 000 ₽"/>
+                        <ComboBoxItem Content="Внедорожник Premium - 2 500 000 ₽"/>
+                        <ComboBoxItem Content="Хэтчбек Urban - 950 000 ₽"/>
+                    </ComboBox>
+                </StackPanel>
+            </Border>
+
+            <Border BorderBrush="#BDC3C7" BorderThickness="1" 
+                    CornerRadius="5" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="Выберите двигатель:" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <StackPanel>
+                        <RadioButton Content="1.6L Бензин (+0 ₽)" GroupName="Engine" Margin="0,5"/>
+                        <RadioButton Content="2.0L Бензин (+150 000 ₽)" GroupName="Engine" Margin="0,5"/>
+                        <RadioButton Content="2.0L Дизель (+200 000 ₽)" GroupName="Engine" Margin="0,5"/>
+                        <RadioButton Content="Гибрид 1.8L (+300 000 ₽)" GroupName="Engine" Margin="0,5"/>
+                        <RadioButton Content="Электрический (+500 000 ₽)" GroupName="Engine" Margin="0,5"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <!-- Кнопка навигации -->
+        <StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Content="Далее →" Click="NextButton_Click" 
+                    Width="100" Background="#27AE60"/>
+        </StackPanel>
     </Grid>
 </Page>
