@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PR12.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,32 @@ namespace PR12
         public MainWindow()
         {
             InitializeComponent();
+            NavigateToModelAndEngine();
+        }
+
+        public void NavigateToModelAndEngine()
+        {
+            MainFrame.Navigate(new ModelAndEngine());
+        }
+
+        public void NavigateToColorAndOptions()
+        {
+            MainFrame.Navigate(new ColorAndOptions());
+        }
+
+        public void NavigateToPrice()
+        {
+            MainFrame.Navigate(new Price());
+        }
+
+        public void NavigateToCredit()
+        {
+            MainFrame.Navigate(new Credit());
+        }
+
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+
         }
     }
 }
