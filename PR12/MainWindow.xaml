@@ -6,9 +6,8 @@
         xmlns:local="clr-namespace:PR12"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-        
+
     <Grid>
-        <!-- Шапка с названием -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -21,8 +20,7 @@
                        FontWeight="Bold"
                        HorizontalAlignment="Center"/>
         </Border>
-
-        <!-- Основная область для отображения страниц -->
+        
         <Frame x:Name="MainFrame" Grid.Row="1" 
                NavigationUIVisibility="Hidden"
                Margin="20,20,20,20" Navigated="MainFrame_Navigated"/>

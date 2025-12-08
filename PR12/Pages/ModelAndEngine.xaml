@@ -8,17 +8,15 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ModelAndEngine">
 
-    <Grid Margin="20">
+    <Grid Margin="20" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Заголовок -->
         <TextBlock Grid.Row="0" Text="Шаг 1: Выбор модели и двигателя"></TextBlock>
-
-        <!-- Содержимое -->
+        
         <StackPanel Grid.Row="1">
             <Border BorderBrush="#BDC3C7" BorderThickness="1" 
                     CornerRadius="5" Padding="20" Margin="0,0,0,20">
@@ -48,7 +46,6 @@
             </Border>
         </StackPanel>
 
-        <!-- Кнопка навигации -->
         <StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Content="Далее →" Click="NextButton_Click" 
                     Width="100" Background="#27AE60"/>

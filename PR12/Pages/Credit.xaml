@@ -11,8 +11,7 @@
         </Grid.RowDefinitions>
 
         <!-- Заголовок -->
-        <TextBlock Grid.Row="0" Text="Шаг 4: Расчёт кредита" 
-                   Style="{StaticResource PageTitle}"/>
+        <TextBlock Grid.Row="0" Text="Шаг 4: Расчёт кредита"/>
 
         <!-- Содержимое -->
         <StackPanel Grid.Row="1">

@@ -29,22 +29,22 @@ namespace PR12
 
         public void NavigateToModelAndEngine()
         {
-            MainFrame.Navigate(new ModelAndEngine());
+            MainFrame.Navigate(new ModelAndEngine(this));
         }
 
         public void NavigateToColorAndOptions()
         {
-            MainFrame.Navigate(new ColorAndOptions());
+            MainFrame.Navigate(new ColorAndOptions(this));
         }
 
         public void NavigateToPrice()
         {
-            MainFrame.Navigate(new Price());
+            MainFrame.Navigate(new Price(this));
         }
 
         public void NavigateToCredit()
         {
-            MainFrame.Navigate(new Credit());
+            MainFrame.Navigate(new Credit(this));
         }
 
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)

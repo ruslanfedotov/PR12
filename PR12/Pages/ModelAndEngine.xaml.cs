@@ -11,9 +11,6 @@ namespace PR12.Pages
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-
-            // Выбираем значения по умолчанию
-            ModelComboBox.SelectedIndex = 0;
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
