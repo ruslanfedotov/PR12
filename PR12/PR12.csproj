@@ -80,6 +80,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Order.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Price.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,6 +98,9 @@
     </Compile>
     <Compile Include="Pages\ModelAndEngine.xaml.cs">
       <DependentUpon>ModelAndEngine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Order.xaml.cs">
+      <DependentUpon>Order.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Price.xaml.cs">
       <DependentUpon>Price.xaml</DependentUpon>

@@ -1,43 +1,31 @@
 ﻿<Page x:Class="PR12.Pages.ColorAndOptions"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Step2">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <ScrollViewer>
+        <StackPanel Margin="20">
+            <TextBlock Text="2. Выберите цвет и опции" 
+                       FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
 
-        <TextBlock Grid.Row="0" Text="Шаг 2: Выбор цвета и опций" 
-                   FontSize="16" FontWeight="Bold" Margin="10"/>
+            <TextBlock Text="Цвет:" Margin="0 10 0 5"/>
+            <ComboBox x:Name="ColorComboBox" SelectedIndex="0" Height="25">
+                <ComboBoxItem Content="Белый (0 ₽)"/>
+                <ComboBoxItem Content="Черный (+15 000 ₽)"/>
+                <ComboBoxItem Content="Серебристый (+20 000 ₽)"/>
+                <ComboBoxItem Content="Синий металлик (+25 000 ₽)"/>
+                <ComboBoxItem Content="Красный перламутр (+40 000 ₽)"/>
+            </ComboBox>
 
-        <StackPanel Grid.Row="1" Margin="10">
-            <TextBlock Text="Цвет:" Margin="0,5"/>
-            <StackPanel>
-                <RadioButton Content="Белый (+0 ₽)" GroupName="Color" Margin="2" Checked="Color_Checked"/>
-                <RadioButton Content="Черный (+15 000 ₽)" GroupName="Color" Margin="2" Checked="Color_Checked"/>
-                <RadioButton Content="Серебристый (+20 000 ₽)" GroupName="Color" Margin="2" Checked="Color_Checked"/>
-                <RadioButton Content="Синий металлик (+25 000 ₽)" GroupName="Color" Margin="2" Checked="Color_Checked"/>
-                <RadioButton Content="Красный перламутр (+40 000 ₽)" GroupName="Color" Margin="2" Checked="Color_Checked"/>
-            </StackPanel>
-
-            <TextBlock Text="Опции:" Margin="0,10,0,5"/>
-            <StackPanel>
-                <CheckBox Content="Кожаный салон (+150 000 ₽)" Margin="2" Checked="Option_Checked" Unchecked="Option_Unchecked"/>
-                <CheckBox Content="Панорамная крыша (+120 000 ₽)" Margin="2" Checked="Option_Checked" Unchecked="Option_Unchecked"/>
-                <CheckBox Content="Премиум-аудиосистема (+80 000 ₽)" Margin="2" Checked="Option_Checked" Unchecked="Option_Unchecked"/>
-                <CheckBox Content="Система помощи при парковке (+60 000 ₽)" Margin="2" Checked="Option_Checked" Unchecked="Option_Unchecked"/>
-                <CheckBox Content="Адаптивный круиз-контроль (+90 000 ₽)" Margin="2" Checked="Option_Checked" Unchecked="Option_Unchecked"/>
-                <CheckBox Content="Вентиляция сидений (+70 000 ₽)" Margin="2" Checked="Option_Checked" Unchecked="Option_Unchecked"/>
-                <CheckBox Content="Подогрев руля (+25 000 ₽)" Margin="2" Checked="Option_Checked" Unchecked="Option_Unchecked"/>
-                <CheckBox Content="Беспроводная зарядка (+15 000 ₽)" Margin="2" Checked="Option_Checked" Unchecked="Option_Unchecked"/>
-            </StackPanel>
+            <TextBlock Text="Дополнительные опции:" Margin="0 20 0 5"/>
+            <CheckBox x:Name="Option1" Content="Кожаный салон (+150 000 ₽)" Margin="5"/>
+            <CheckBox x:Name="Option2" Content="Панорамная крыша (+120 000 ₽)" Margin="5"/>
+            <CheckBox x:Name="Option3" Content="Премиум-аудиосистема (+80 000 ₽)" Margin="5"/>
+            <CheckBox x:Name="Option4" Content="Система помощи при парковке (+60 000 ₽)" Margin="5"/>
+            <CheckBox x:Name="Option5" Content="Адаптивный круиз-контроль (+90 000 ₽)" Margin="5"/>
+            <CheckBox x:Name="Option6" Content="Вентиляция сидений (+70 000 ₽)" Margin="5"/>
+            <CheckBox x:Name="Option7" Content="Подогрев руля (+25 000 ₽)" Margin="5"/>
+            <CheckBox x:Name="Option8" Content="Беспроводная зарядка (+15 000 ₽)" Margin="5"/>
         </StackPanel>
-
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Назад" Click="BackButton_Click" Margin="0,0,10,0" Width="100"/>
-            <Button Content="Далее" Click="NextButton_Click" Width="100"/>
-        </StackPanel>
-    </Grid>
+    </ScrollViewer>
 </Page>

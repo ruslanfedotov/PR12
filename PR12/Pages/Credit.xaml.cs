@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace PR12.Pages
@@ -12,112 +13,108 @@ namespace PR12.Pages
             InitializeComponent();
             _mainWindow = mainWindow;
 
-            try
-            {
-                UpdateCalculation();
-            }
-            catch
-            {
-                // Просто игнорируем ошибки при инициализации
-            }
+            // Загружаем данные после инициализации компонентов
+            LoadData();
         }
 
-        private void DownPaymentTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CheckInputs();
-        }
-
-        private void LoanTermTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CheckInputs();
-        }
-
-        private void CheckInputs()
-        {
-            bool isDownPaymentValid = true;
-            bool isLoanTermValid = true;
-
-            // Проверяем первый ввод (первоначальный взнос)
-            string dpText = DownPaymentTextBox.Text;
-            if (string.IsNullOrWhiteSpace(dpText))
-            {
-                DownPaymentError.Text = "Введите число";
-                isDownPaymentValid = false;
-            }
-            else if (!decimal.TryParse(dpText, out decimal dpValue))
-            {
-                DownPaymentError.Text = "Только числа";
-                isDownPaymentValid = false;
-            }
-            else if (dpValue < 10 || dpValue > 90)
-            {
-                DownPaymentError.Text = "От 10 до 90";
-                isDownPaymentValid = false;
-            }
-            else
-            {
-                DownPaymentError.Text = "";
-                _mainWindow.SetDownPaymentPercent(dpText);
-            }
-
-            // Проверяем второй ввод (срок кредита)
-            string ltText = LoanTermTextBox.Text;
-            if (string.IsNullOrWhiteSpace(ltText))
-            {
-                LoanTermError.Text = "Введите число";
-                isLoanTermValid = false;
-            }
-            else if (!int.TryParse(ltText, out int ltValue))
-            {
-                LoanTermError.Text = "Только целые числа";
-                isLoanTermValid = false;
-            }
-            else if (ltValue < 12 || ltValue > 96)
-            {
-                LoanTermError.Text = "От 12 до 96";
-                isLoanTermValid = false;
-            }
-            else
-            {
-                LoanTermError.Text = "";
-                _mainWindow.SetLoanTerm(ltText);
-            }
-
-            // Если оба ввода корректны, обновляем расчет
-            if (isDownPaymentValid && isLoanTermValid)
-            {
-                FinishButton.IsEnabled = true;
-                UpdateCalculation();
-            }
-            else
-            {
-                FinishButton.IsEnabled = false;
-            }
-        }
-
-        private void UpdateCalculation()
+        private void LoadData()
         {
             try
             {
+                // Проверяем, что MainWindow существует
+                if (_mainWindow == null)
+                {
+                    MessageBox.Show("MainWindow не инициализирован");
+                    return;
+                }
+
+                // Проверяем, что элементы управления созданы
+                if (CarPriceText == null || DownPaymentTextBox == null ||
+                    LoanTermTextBox == null || DownPaymentResultText == null ||
+                    LoanAmountText == null || MonthlyPaymentText == null ||
+                    TotalWithInterestText == null)
+                {
+                    MessageBox.Show("Элементы управления не инициализированы");
+                    return;
+                }
+
+                // Загружаем данные
                 CarPriceText.Text = $"{_mainWindow.GetTotalPrice():N0} ₽";
-                DownPaymentAmountText.Text = $"Первоначальный взнос: {_mainWindow.GetDownPaymentAmount():N0} ₽";
-                LoanAmountText.Text = $"Сумма кредита: {_mainWindow.GetLoanAmount():N0} ₽";
-                MonthlyPaymentText.Text = $"Ежемесячный платеж: {_mainWindow.GetMonthlyPayment():N0} ₽";
+                DownPaymentTextBox.Text = _mainWindow.DownPaymentPercent.ToString();
+                LoanTermTextBox.Text = _mainWindow.LoanTerm.ToString();
+
+                // Выполняем расчет
+                UpdateCreditDisplay();
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show($"Ошибка загрузки данных шага 4: {ex.Message}");
             }
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void CalculateCredit(object sender, TextChangedEventArgs e)
         {
-            _mainWindow.NavigateToPrice();
+            try
+            {
+                // Проверяем, что MainWindow существует
+                if (_mainWindow == null) return;
+
+                // Проверяем ввод
+                if (!decimal.TryParse(DownPaymentTextBox.Text, out decimal downPercent) ||
+                    downPercent < 10 || downPercent > 90)
+                {
+                    DownPaymentResultText.Text = "10-90%";
+                    return;
+                }
+
+                if (!int.TryParse(LoanTermTextBox.Text, out int term) ||
+                    term < 12 || term > 96)
+                {
+                    MonthlyPaymentText.Text = "12-96 месяцев";
+                    return;
+                }
+
+                // Сохраняем значения
+                _mainWindow.DownPaymentPercent = downPercent;
+                _mainWindow.LoanTerm = term;
+
+                // Пересчитываем кредит
+                _mainWindow.CalculateCredit();
+
+                // Обновляем отображение
+                UpdateCreditDisplay();
+            }
+            catch (Exception ex)
+            {
+                // Устанавливаем значения по умолчанию при ошибке
+                DownPaymentResultText.Text = "Ошибка";
+                LoanAmountText.Text = "Ошибка";
+                MonthlyPaymentText.Text = "Ошибка";
+                TotalWithInterestText.Text = "Ошибка";
+            }
         }
 
-        private void FinishButton_Click(object sender, RoutedEventArgs e)
+        private void UpdateCreditDisplay()
         {
-            MessageBox.Show("Заявка оформлена!", "Успешно", MessageBoxButton.OK);
-            Application.Current.Shutdown();
+            try
+            {
+                if (_mainWindow == null) return;
+
+                decimal carPrice = _mainWindow.GetTotalPrice();
+                decimal downPayment = _mainWindow.GetDownPaymentAmount();
+                decimal loanAmount = _mainWindow.GetLoanAmount();
+                decimal monthlyPayment = _mainWindow.GetMonthlyPayment();
+                decimal totalWithInterest = downPayment + (monthlyPayment * _mainWindow.LoanTerm);
+
+                DownPaymentResultText.Text = $"{downPayment:N0} ₽";
+                LoanAmountText.Text = $"{loanAmount:N0} ₽";
+                MonthlyPaymentText.Text = $"{monthlyPayment:N0} ₽/мес";
+                TotalWithInterestText.Text = $"{totalWithInterest:N0} ₽";
+            }
+            catch (Exception)
+            {
+                // Игнорируем ошибки отображения
+            }
         }
     }
 }

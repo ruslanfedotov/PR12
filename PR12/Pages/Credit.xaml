@@ -1,30 +1,45 @@
 ﻿<Page x:Class="PR12.Pages.Credit"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Credit">
+      Title="Step4">
 
-    <StackPanel Margin="10">
-        <TextBlock Text="Расчет кредита" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+    <StackPanel Margin="20">
+        <TextBlock Text="4. Расчет кредита" 
+                   FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
 
-        <TextBlock Text="Стоимость автомобиля:"/>
-        <TextBlock x:Name="CarPriceText" FontWeight="Bold" Margin="0,0,0,10"/>
+        <TextBlock Text="Сумма автомобиля:" Margin="0 10 0 5"/>
+        <TextBlock x:Name="CarPriceText" FontWeight="Bold"/>
 
-        <TextBlock Text="Первоначальный взнос (% от 10 до 90):"/>
-        <TextBox x:Name="DownPaymentTextBox" Width="100" Margin="0,5"/>
-        <TextBlock x:Name="DownPaymentError" Foreground="Red"/>
+        <TextBlock Text="Первоначальный взнос (%):" Margin="0 10 0 5"/>
+        <TextBox x:Name="DownPaymentTextBox" Text="20" Height="25" 
+                 TextChanged="CalculateCredit"/>
 
-        <TextBlock Text="Срок кредита (от 12 до 96 месяцев):" Margin="0,10,0,0"/>
-        <TextBox x:Name="LoanTermTextBox" Width="100" Margin="0,5"/>
-        <TextBlock x:Name="LoanTermError" Foreground="Red"/>
+        <TextBlock Text="Срок кредита (месяцев, 12-96):" Margin="0 10 0 5"/>
+        <TextBox x:Name="LoanTermTextBox" Text="36" Height="25" 
+                 TextChanged="CalculateCredit"/>
 
-        <TextBlock Text="Расчет:" FontWeight="Bold" Margin="0,20,0,5"/>
-        <TextBlock x:Name="DownPaymentAmountText"/>
-        <TextBlock x:Name="LoanAmountText"/>
-        <TextBlock x:Name="MonthlyPaymentText" FontWeight="Bold" Foreground="Green" Margin="0,10"/>
+        <Border Height="1" Background="LightGray" Margin="0 20"/>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-            <Button Content="Назад" Click="BackButton_Click" Width="80" Margin="0,0,10,0"/>
-            <Button x:Name="FinishButton" Content="Завершить" Click="FinishButton_Click" Width="80"/>
+        <TextBlock Text="Результаты расчета:" FontWeight="Bold" Margin="0 10 0 5"/>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Первоначальный взнос:" Width="180"/>
+            <TextBlock x:Name="DownPaymentResultText" FontWeight="Bold"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Сумма кредита:" Width="180"/>
+            <TextBlock x:Name="LoanAmountText" FontWeight="Bold"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Ежемесячный платеж:" Width="180"/>
+            <TextBlock x:Name="MonthlyPaymentText" FontWeight="Bold" Foreground="Green"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Общая сумма с учетом %:" Width="180"/>
+            <TextBlock x:Name="TotalWithInterestText" FontWeight="Bold"/>
         </StackPanel>
     </StackPanel>
 </Page>

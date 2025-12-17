@@ -1,46 +1,27 @@
 ﻿<Page x:Class="PR12.Pages.ModelAndEngine"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Step1">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <StackPanel Margin="20">
+        <TextBlock Text="1. Выберите модель и двигатель" 
+                   FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
 
-        <TextBlock Grid.Row="0" Text="Шаг 1: Выбор модели и двигателя" 
-                   FontSize="16" FontWeight="Bold" Margin="10"/>
+        <TextBlock Text="Модель:" Margin="0 10 0 5"/>
+        <ComboBox x:Name="ModelComboBox" SelectedIndex="0" Height="25">
+            <ComboBoxItem Content="Седан Comfort (1 200 000 ₽)"/>
+            <ComboBoxItem Content="Кроссовер Sport (1 800 000 ₽)"/>
+            <ComboBoxItem Content="Внедорожник Premium (2 500 000 ₽)"/>
+            <ComboBoxItem Content="Хэтчбек Urban (950 000 ₽)"/>
+        </ComboBox>
 
-        <StackPanel Grid.Row="1" Margin="10">
-            <TextBlock Text="Модель:" Margin="0,5"/>
-            <StackPanel>
-                <RadioButton Content="Седан Comfort (1 200 000 ₽)" 
-                           GroupName="Model" Margin="2" Checked="Model_Checked"/>
-                <RadioButton Content="Кроссовер Sport (1 800 000 ₽)" 
-                           GroupName="Model" Margin="2" Checked="Model_Checked"/>
-                <RadioButton Content="Внедорожник Premium (2 500 000 ₽)" 
-                           GroupName="Model" Margin="2" Checked="Model_Checked"/>
-                <RadioButton Content="Хэтчбек Urban (950 000 ₽)" 
-                           GroupName="Model" Margin="2" Checked="Model_Checked"/>
-            </StackPanel>
-
-            <TextBlock Text="Двигатель:" Margin="0,10,0,5"/>
-            <StackPanel>
-                <RadioButton Content="1.6L Бензин (+0 ₽)" 
-                           GroupName="Engine" Margin="2" Checked="Engine_Checked"/>
-                <RadioButton Content="2.0L Бензин (+150 000 ₽)" 
-                           GroupName="Engine" Margin="2" Checked="Engine_Checked"/>
-                <RadioButton Content="2.0L Дизель (+200 000 ₽)" 
-                           GroupName="Engine" Margin="2" Checked="Engine_Checked"/>
-                <RadioButton Content="Гибрид 1.8L (+300 000 ₽)" 
-                           GroupName="Engine" Margin="2" Checked="Engine_Checked"/>
-                <RadioButton Content="Электрический (+500 000 ₽)" 
-                           GroupName="Engine" Margin="2" Checked="Engine_Checked"/>
-            </StackPanel>
-        </StackPanel>
-
-        <Button Grid.Row="2" Content="Далее" Click="NextButton_Click" 
-                Margin="10" HorizontalAlignment="Right" Width="100"/>
-    </Grid>
+        <TextBlock Text="Двигатель:" Margin="0 10 0 5"/>
+        <ComboBox x:Name="EngineComboBox" SelectedIndex="0" Height="25">
+            <ComboBoxItem Content="1.6L Бензин (0 ₽)"/>
+            <ComboBoxItem Content="2.0L Бензин (+150 000 ₽)"/>
+            <ComboBoxItem Content="2.0L Дизель (+200 000 ₽)"/>
+            <ComboBoxItem Content="Гибрид 1.8L (+300 000 ₽)"/>
+            <ComboBoxItem Content="Электрический (+500 000 ₽)"/>
+        </ComboBox>
+    </StackPanel>
 </Page>
